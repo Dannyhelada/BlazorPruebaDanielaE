@@ -1,0 +1,48 @@
+﻿@page "/"
+@using BlazorPruebaDanielaE.Controlers
+@using BlazorPruebaDanielaE.Models
+
+@inject DocumentoController Api
+
+<h3>Listado de Movimientos</h3>
+
+@if (movimientos == null)
+{
+    <p>Cargando...</p>
+}
+else if (movimientos.Count == 0)
+{
+    <p>No hay datos.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Activo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in movimientos)
+            {
+                <tr>
+                    <td>@m.Codigo</td>
+                    <td>@m.Descripcion</td>
+                    <td>@(m.VActiva ? "Sí" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Documento>? movimientos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Api.SetToken("ae8bad44-7348-11ee-b962-0242ac120002");
+        movimientos = await Api.ObtenerMovimientos();
+    }
+}
