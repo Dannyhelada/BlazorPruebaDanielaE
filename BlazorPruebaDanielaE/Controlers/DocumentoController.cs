@@ -23,7 +23,7 @@ namespace BlazorPruebaDanielaE.Controlers
                 new AuthenticationHeaderValue("Bearer", token);
         }
 
-        public async Task<List<Documento>> ObtenerMovimientos()
+        public async Task<List<Documento>> ObtenerDocumentos()
         {
             var response = await _http.GetAsync("https://mainserver.ziursoftware.com/Ziur.API/basedatos_01/ZiurServiceRest.svc/api/DocumentosFillsCombos");
             response.EnsureSuccessStatusCode();

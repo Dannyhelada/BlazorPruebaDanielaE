@@ -4,13 +4,13 @@
 
 @inject DocumentoController Api
 
-<h3>Listado de Movimientos</h3>
+<h3>Listado de Documentos</h3>
 
-@if (movimientos == null)
+@if (documentos == null)
 {
     <p>Cargando...</p>
 }
-else if (movimientos.Count == 0)
+else if (documentos.Count == 0)
 {
     <p>No hay datos.</p>
 }
@@ -25,7 +25,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var m in movimientos)
+            @foreach (var m in documentos)
             {
                 <tr>
                     <td>@m.Codigo</td>
@@ -38,11 +38,11 @@ else
 }
 
 @code {
-    private List<Documento>? movimientos;
+    private List<Documento>? documentos;
 
     protected override async Task OnInitializedAsync()
     {
         Api.SetToken("ae8bad44-7348-11ee-b962-0242ac120002");
-        movimientos = await Api.ObtenerMovimientos();
+        documentos = await Api.ObtenerDocumentos();
     }
 }
